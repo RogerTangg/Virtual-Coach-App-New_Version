@@ -66,9 +66,14 @@ export function PreferenceForm({ onSubmit, isLoading = false }: PreferenceFormPr
   };
 
   return (
-    <Container size="md" py="xl">
+    <Container 
+      size="md" 
+      py="xl"
+      px={{ base: 'md', sm: 'lg', md: 'xl' }}
+      style={{ maxWidth: '1200px' }}
+    >
       <form onSubmit={handleSubmit}>
-        <Stack gap="xl">
+        <Stack gap={{ base: 'lg', md: 'xl' }}>
           {/* 錯誤訊息 */}
           {errors.length > 0 && (
             <PreferenceCard
@@ -123,7 +128,7 @@ export function PreferenceForm({ onSubmit, isLoading = false }: PreferenceFormPr
             description="可選擇一個或多個目標部位"
             badges={[{ label: '必填', color: 'red' }, { label: '可多選', color: 'green' }]}
           >
-            <SimpleGrid cols={{ base: 2, sm: 3 }} spacing="md">
+            <SimpleGrid cols={{ base: 2, sm: 3, md: 3 }} spacing="md">
               {Object.values(TargetMuscle).map((muscle) => (
                 <OptionButton
                   key={muscle}
@@ -196,11 +201,16 @@ export function PreferenceForm({ onSubmit, isLoading = false }: PreferenceFormPr
               fontSize: '16px',
               fontWeight: 600,
               height: '56px',
+              minHeight: '44px', // Touch-friendly
             }}
             styles={{
               root: {
                 '&:hover': {
                   backgroundColor: matchaGreen[600],
+                },
+                '@media (max-width: 767px)': {
+                  height: '48px',
+                  fontSize: '16px',
                 },
               },
             }}

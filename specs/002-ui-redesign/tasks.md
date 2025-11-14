@@ -147,23 +147,23 @@
 
 ### Visual Regression Tests for User Story 4
 
-- [ ] T050 [P] [US4] Create Playwright visual test for PreferenceForm in virtual_coach_app_frontend/tests/visual/preference-form.spec.ts (desktop/tablet/mobile snapshots, hover states)
-- [ ] T051 [P] [US4] Create Playwright visual test for WorkoutList in virtual_coach_app_frontend/tests/visual/workout-list.spec.ts (desktop/tablet/mobile snapshots, card expand states)
-- [ ] T052 [P] [US4] Create Playwright visual test for TrainingPlayer in virtual_coach_app_frontend/tests/visual/training-player.spec.ts (desktop/tablet/mobile snapshots, fullscreen layout)
+- [X] T050 [P] [US4] Create Playwright visual test for PreferenceForm in virtual_coach_app_frontend/tests/visual/preference-form.spec.ts (desktop/tablet/mobile snapshots, hover states)
+- [X] T051 [P] [US4] Create Playwright visual test for WorkoutList in virtual_coach_app_frontend/tests/visual/workout-list.spec.ts (desktop/tablet/mobile snapshots, card expand states)
+- [X] T052 [P] [US4] Create Playwright visual test for TrainingPlayer in virtual_coach_app_frontend/tests/visual/training-player.spec.ts (desktop/tablet/mobile snapshots, fullscreen layout)
 
 ### Implementation for User Story 4
 
-- [ ] T053 [P] [US4] Create ResponsiveContainer layout component in virtual_coach_app_frontend/src/components/layout/ResponsiveContainer.tsx (max-width 1200-1440px desktop, centered, left-right padding based on breakpoint)
-- [ ] T054 [P] [US4] Create AppShell layout component in virtual_coach_app_frontend/src/components/layout/AppShell.tsx (main app container with responsive padding and margin)
-- [ ] T055 [US4] Add mobile responsive styles to PreferenceForm (single column layout < 768px, 16-24px margins, full-width cards, 44px+ button height, 16px+ font size)
-- [ ] T056 [US4] Add tablet responsive styles to PreferenceForm (2-column grid 768-1024px, 24px margins, increased card spacing)
-- [ ] T057 [US4] Add desktop responsive styles to PreferenceForm (3-column grid ≥1024px, 32px spacing, centered max-width 1440px, 48px margins)
-- [ ] T058 [US4] Add mobile responsive styles to WorkoutList (single column, full-width cards, vertical info layout, bottom fixed action buttons)
-- [ ] T059 [US4] Add desktop responsive styles to WorkoutList (optional two-column: left list + right detail, or maintain single column with wider cards)
-- [ ] T060 [US4] Add mobile responsive styles to TrainingPlayer (portrait: vertical layout, landscape: horizontal layout with adjusted timer size 150-200px)
-- [ ] T061 [US4] Add desktop responsive styles to TrainingPlayer (optional: left video + right info sidebar, or maintain centered layout with 200-300px timer)
-- [ ] T062 [US4] Implement typography scaling across breakpoints (mobile: h1 32px, tablet: h1 40px, desktop: h1 48px, body 16-18px responsive)
-- [ ] T063 [US4] Add touch-friendly interaction zones for mobile (all buttons ≥44x44px, increased tap target padding, swipe gestures for card expand/collapse)
+- [X] T053 [P] [US4] Create ResponsiveContainer layout component in virtual_coach_app_frontend/src/components/layout/ResponsiveContainer.tsx (max-width 1200-1440px desktop, centered, left-right padding based on breakpoint)
+- [X] T054 [P] [US4] Create AppShell layout component in virtual_coach_app_frontend/src/components/layout/AppShell.tsx (main app container with responsive padding and margin)
+- [X] T055 [US4] Add mobile responsive styles to PreferenceForm (single column layout < 768px, 16-24px margins, full-width cards, 44px+ button height, 16px+ font size)
+- [X] T056 [US4] Add tablet responsive styles to PreferenceForm (2-column grid 768-1024px, 24px margins, increased card spacing)
+- [X] T057 [US4] Add desktop responsive styles to PreferenceForm (3-column grid ≥1024px, 32px spacing, centered max-width 1440px, 48px margins)
+- [X] T058 [US4] Add mobile responsive styles to WorkoutList (single column, full-width cards, vertical info layout, bottom fixed action buttons)
+- [X] T059 [US4] Add desktop responsive styles to WorkoutList (optional two-column: left list + right detail, or maintain single column with wider cards)
+- [X] T060 [US4] Add mobile responsive styles to TrainingPlayer (portrait: vertical layout, landscape: horizontal layout with adjusted timer size 150-200px)
+- [X] T061 [US4] Add desktop responsive styles to TrainingPlayer (optional: left video + right info sidebar, or maintain centered layout with 200-300px timer)
+- [X] T062 [US4] Implement typography scaling across breakpoints (mobile: h1 32px, tablet: h1 40px, desktop: h1 48px, body 16-18px responsive)
+- [X] T063 [US4] Add touch-friendly interaction zones for mobile (all buttons ≥44x44px, increased tap target padding, swipe gestures for card expand/collapse)
 
 **Checkpoint**: User Story 4 完成 - 所有介面響應式完美適配三種裝置,綠色主題一致
 

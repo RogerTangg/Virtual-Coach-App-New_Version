@@ -75,9 +75,13 @@ export function TrainingPlayer({ workoutPlan, onExit }: TrainingPlayerProps) {
 
   // 顯示完成畫面
   if (player.isCompleted) {
+    const goalName = workoutPlan.preferences.trainingGoal === 'weight_loss' ? '減脂' : 
+                     workoutPlan.preferences.trainingGoal === 'muscle_gain' ? '增肌' : 
+                     workoutPlan.preferences.trainingGoal === 'endurance' ? '耐力' : 
+                     workoutPlan.preferences.trainingGoal;
     return (
       <CompletionScreen
-        workoutTitle={`${workoutPlan.preferences.trainingGoal} 訓練`}
+        workoutTitle={`${goalName} 訓練`}
         totalExercises={player.totalExercises}
         totalDurationMinutes={workoutPlan.estimatedDurationMinutes}
         onRestart={player.reset}
@@ -93,7 +97,8 @@ export function TrainingPlayer({ workoutPlan, onExit }: TrainingPlayerProps) {
       color: '#1B5E20',
       padding: 0,
       position: 'relative',
-      overflow: 'hidden'
+      overflowX: 'hidden', // Only hide horizontal overflow
+      overflowY: 'auto', // Allow vertical scrolling
     }}>
       {/* 頂部運動資訊覆蓋層 */}
       <div style={{
@@ -101,16 +106,20 @@ export function TrainingPlayer({ workoutPlan, onExit }: TrainingPlayerProps) {
         top: 0,
         left: 0,
         right: 0,
-        padding: '24px 32px',
+        padding: '16px 24px', // Reduced padding
         background: 'linear-gradient(to bottom, rgba(129, 199, 132, 0.8), transparent)',
-        zIndex: 10
+        zIndex: 10,
+        pointerEvents: 'none', // Allow clicks to pass through
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ fontSize: '18px', fontWeight: 700, color: '#1B5E20' }}>
+          <div style={{ fontSize: '16px', fontWeight: 700, color: '#1B5E20' }}>
             運動 {player.currentExerciseIndex + 1} / {player.totalExercises}
           </div>
-          <div style={{ fontSize: '14px', fontWeight: 600, color: '#2E7D32' }}>
-            {workoutPlan.preferences.trainingGoal}
+          <div style={{ fontSize: '13px', fontWeight: 600, color: '#2E7D32' }}>
+            {workoutPlan.preferences.trainingGoal === 'weight_loss' ? '減脂' : 
+             workoutPlan.preferences.trainingGoal === 'muscle_gain' ? '增肌' : 
+             workoutPlan.preferences.trainingGoal === 'endurance' ? '耐力' : 
+             workoutPlan.preferences.trainingGoal}
           </div>
         </div>
       </div>
@@ -120,43 +129,58 @@ export function TrainingPlayer({ workoutPlan, onExit }: TrainingPlayerProps) {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
         minHeight: '100vh',
-        padding: '80px 32px 32px'
-      }}>
+        paddingTop: '120px', // Fixed top padding for header
+        paddingBottom: '32px',
+        paddingLeft: '16px',
+        paddingRight: '16px',
+      }}
+      className="training-player-content">
         {/* 影片播放器 */}
         <VideoPlayer
           exercise={player.currentExercise.exercise}
           isPlaying={player.isPlaying}
         />
 
-        {/* 運動資訊 (白色卡片) */}
+        {/* 運動資訊 (半透明綠色覆蓋) */}
         <div style={{
           background: 'rgba(255, 255, 255, 0.95)',
           borderRadius: '20px',
-          padding: '32px',
+          padding: '24px', // Reduced from 32px on mobile
           boxShadow: '0 8px 32px rgba(27, 94, 32, 0.2)',
           border: '2px solid #81C784',
           maxWidth: '800px',
           width: '100%',
           marginTop: '24px'
-        }}>
-          <h2 style={{ fontSize: '32px', fontWeight: 700, marginBottom: '24px', color: '#1B5E20' }}>
+        }}
+        className="training-player-info">
+          <h2 style={{ 
+            fontSize: '28px', // Scaled down from 32px
+            fontWeight: 700, 
+            marginBottom: '20px', 
+            color: '#1B5E20' 
+          }}>
             {player.currentExercise.exercise.name}
           </h2>
-          <div style={{ display: 'flex', gap: '40px', justifyContent: 'center', marginBottom: '16px' }}>
+          <div style={{ 
+            display: 'flex', 
+            gap: '32px', // Reduced from 40px
+            justifyContent: 'center', 
+            marginBottom: '16px',
+            flexWrap: 'wrap', // Allow wrapping on small screens
+          }}>
             <div style={{ textAlign: 'center' }}>
               <span style={{ fontSize: '12px', color: '#757575', fontWeight: 600, textTransform: 'uppercase' }}>組數</span>
-              <p style={{ fontSize: '32px', fontWeight: 700, marginTop: '8px', color: '#66BB6A' }}>{player.currentExercise.sets}</p>
+              <p style={{ fontSize: '28px', fontWeight: 700, marginTop: '8px', color: '#66BB6A' }}>{player.currentExercise.sets}</p>
             </div>
             <div style={{ textAlign: 'center' }}>
               <span style={{ fontSize: '12px', color: '#757575', fontWeight: 600, textTransform: 'uppercase' }}>次數</span>
-              <p style={{ fontSize: '32px', fontWeight: 700, marginTop: '8px', color: '#66BB6A' }}>{player.currentExercise.reps}</p>
+              <p style={{ fontSize: '28px', fontWeight: 700, marginTop: '8px', color: '#66BB6A' }}>{player.currentExercise.reps}</p>
             </div>
             {player.currentExercise.restSeconds > 0 && (
               <div style={{ textAlign: 'center' }}>
                 <span style={{ fontSize: '12px', color: '#757575', fontWeight: 600, textTransform: 'uppercase' }}>休息</span>
-                <p style={{ fontSize: '32px', fontWeight: 700, marginTop: '8px', color: '#66BB6A' }}>{player.currentExercise.restSeconds}s</p>
+                <p style={{ fontSize: '28px', fontWeight: 700, marginTop: '8px', color: '#66BB6A' }}>{player.currentExercise.restSeconds}s</p>
               </div>
             )}
           </div>
@@ -168,7 +192,7 @@ export function TrainingPlayer({ workoutPlan, onExit }: TrainingPlayerProps) {
         </div>
 
         {/* 計時器 (透明背景) */}
-        <div style={{ marginTop: '48px' }}>
+        <div style={{ marginTop: '40px' }} className="training-player-timer">
           <Timer
             remainingSeconds={player.remainingSeconds}
             totalSeconds={player.totalSeconds}
@@ -194,20 +218,89 @@ export function TrainingPlayer({ workoutPlan, onExit }: TrainingPlayerProps) {
 
       {/* 退出確認對話框 */}
       {showExitConfirm && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-          <div className="bg-gray-800 rounded-lg p-6 max-w-sm w-full mx-4">
-            <h3 className="text-xl font-bold mb-4">確定要退出訓練嗎?</h3>
-            <p className="text-gray-400 mb-6">你的訓練進度將不會被保存</p>
-            <div className="flex gap-3">
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          backgroundColor: 'rgba(27, 94, 32, 0.75)', // Matcha green overlay
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 50
+        }}>
+          <div style={{
+            background: 'linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%)',
+            borderRadius: '16px',
+            padding: '32px',
+            maxWidth: '400px',
+            width: '100%',
+            margin: '0 16px',
+            boxShadow: '0 20px 60px rgba(27, 94, 32, 0.3)',
+            border: '2px solid #81C784'
+          }}>
+            <h3 style={{
+              fontSize: '24px',
+              fontWeight: 700,
+              marginBottom: '16px',
+              color: '#1B5E20'
+            }}>
+              確定要退出訓練嗎?
+            </h3>
+            <p style={{
+              color: '#2E7D32',
+              marginBottom: '24px',
+              fontSize: '15px',
+              lineHeight: 1.6
+            }}>
+              你的訓練進度將不會被保存
+            </p>
+            <div style={{ display: 'flex', gap: '12px' }}>
               <button
                 onClick={handleExitCancel}
-                className="flex-1 py-2 px-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition-colors"
+                style={{
+                  flex: 1,
+                  padding: '12px 24px',
+                  borderRadius: '12px',
+                  backgroundColor: '#FFFFFF',
+                  border: '2px solid #81C784',
+                  color: '#2E7D32',
+                  fontWeight: 600,
+                  fontSize: '16px',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#F1F8E9';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#FFFFFF';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
               >
                 取消
               </button>
               <button
                 onClick={handleExitConfirm}
-                className="flex-1 py-2 px-4 rounded-lg bg-red-600 hover:bg-red-700 transition-colors"
+                style={{
+                  flex: 1,
+                  padding: '12px 24px',
+                  borderRadius: '12px',
+                  backgroundColor: '#C62828',
+                  border: '2px solid #B71C1C',
+                  color: '#FFFFFF',
+                  fontWeight: 600,
+                  fontSize: '16px',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#B71C1C';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#C62828';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
               >
                 確定
               </button>

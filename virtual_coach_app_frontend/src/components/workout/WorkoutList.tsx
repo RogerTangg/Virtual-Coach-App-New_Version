@@ -44,11 +44,16 @@ export function WorkoutList({ workoutPlan, onStartTraining, onRegenerate }: Work
   };
 
   return (
-    <Container size="lg" px="md">
-      <Stack gap="xl">
+    <Container size="lg" px={{ base: 'md', sm: 'lg', md: 'xl' }}>
+      <Stack gap={{ base: 'lg', md: 'xl' }}>
         {/* 標題 */}
         <div>
-          <h2 style={{ fontSize: '28px', fontWeight: 'bold', color: '#1f2937', marginBottom: '8px' }}>
+          <h2 style={{ 
+            fontSize: '28px', 
+            fontWeight: 'bold', 
+            color: '#1f2937', 
+            marginBottom: '8px',
+          }}>
             您的訓練計畫
           </h2>
           <p style={{ fontSize: '16px', color: '#6b7280', margin: 0 }}>
@@ -99,6 +104,7 @@ export function WorkoutList({ workoutPlan, onStartTraining, onRegenerate }: Work
                   backgroundColor: matchaGreen[500],
                   color: 'white',
                   height: '56px',
+                  minHeight: '44px', // Touch-friendly
                   fontSize: '16px',
                   fontWeight: 600,
                   borderRadius: '12px',
@@ -123,6 +129,7 @@ export function WorkoutList({ workoutPlan, onStartTraining, onRegenerate }: Work
                   borderColor: matchaGreen[500],
                   color: matchaGreen[600],
                   height: '56px',
+                  minHeight: '44px', // Touch-friendly
                   fontSize: '16px',
                   fontWeight: 600,
                   borderRadius: '12px',
@@ -146,7 +153,7 @@ export function WorkoutList({ workoutPlan, onStartTraining, onRegenerate }: Work
           cancelLabel="取消"
         />
 
-        {/* 提示訊息 - 淡綠色主題 */}
+        {/* 提示訊息 - 淡綠色主題，文字置中 */}
         <Paper
           p="md"
           radius="md"
@@ -155,29 +162,38 @@ export function WorkoutList({ workoutPlan, onStartTraining, onRegenerate }: Work
             border: `1px solid ${matchaGreen[200]}`,
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'start', gap: '12px' }}>
-            <svg
-              style={{ width: '20px', height: '20px', color: matchaGreen[600], flexShrink: 0, marginTop: '2px' }}
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fillRule="evenodd"
-                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <div>
-              <Text size="sm" fw={600} c={matchaGreen[800]} mb={4}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <svg
+                style={{ width: '20px', height: '20px', color: matchaGreen[600], flexShrink: 0 }}
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <Text size="sm" fw={600} c={matchaGreen[800]}>
                 訓練小提示
               </Text>
-              <ul style={{ fontSize: '14px', color: matchaGreen[700], margin: 0, paddingLeft: '20px' }}>
-                <li>訓練前請先做 5-10 分鐘暖身運動</li>
-                <li>注意動作正確性，避免受傷</li>
-                <li>依照自己的身體狀況調整強度</li>
-                <li>運動後記得做伸展放鬆</li>
-              </ul>
             </div>
+            <ul style={{ 
+              fontSize: '14px', 
+              color: matchaGreen[700], 
+              margin: 0, 
+              paddingLeft: '0',
+              listStyle: 'none',
+              textAlign: 'center',
+              width: '100%',
+              maxWidth: '500px'
+            }}>
+              <li>訓練前請先做 5-10 分鐘暖身運動</li>
+              <li>注意動作正確性，避免受傷</li>
+              <li>依照自己的身體狀況調整強度</li>
+              <li>運動後記得做伸展放鬆</li>
+            </ul>
           </div>
         </Paper>
       </Stack>
