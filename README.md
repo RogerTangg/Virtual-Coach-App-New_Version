@@ -151,19 +151,6 @@ npx playwright test
 npm run test:coverage
 ```
 
-## 🌐 部署
-
-### 部署到 Render
-
-詳細步驟請參考 [RENDER_DEPLOYMENT_GUIDE.md](./virtual_coach_app_frontend/RENDER_DEPLOYMENT_GUIDE.md)
-
-**快速部署**:
-1. Fork 此專案到你的 GitHub
-2. 在 [Render](https://render.com) 建立新的 Web Service
-3. 連接 GitHub Repository
-4. 設定環境變數 (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`)
-5. 部署完成！
-
 ### 建置指令
 ```bash
 npm run build

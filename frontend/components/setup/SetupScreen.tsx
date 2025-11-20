@@ -37,7 +37,7 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onComplete, onBack }) 
   ];
 
   const durations = [15, 30, 45, 60];
-  
+
   const difficulties = [
     { id: 'beginner', label: '初階', desc: '剛開始運動' },
     { id: 'intermediate', label: '中階', desc: '有運動習慣' },
@@ -50,7 +50,7 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onComplete, onBack }) 
       const current = prev.equipment;
       if (current.includes(id)) {
         // 不允許取消選擇 "bodyweight" (徒手是基礎)
-        if (id === 'bodyweight') return prev; 
+        if (id === 'bodyweight') return prev;
         return { ...prev, equipment: current.filter(e => e !== id) };
       } else {
         return { ...prev, equipment: [...current, id] };
@@ -65,25 +65,25 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onComplete, onBack }) 
   };
 
   // 渲染選擇卡片
-  const SelectionCard = ({ 
-    selected, 
-    onClick, 
-    title, 
-    description, 
-    icon 
-  }: { 
-    selected: boolean; 
-    onClick: () => void; 
-    title: string; 
+  const SelectionCard = ({
+    selected,
+    onClick,
+    title,
+    description,
+    icon
+  }: {
+    selected: boolean;
+    onClick: () => void;
+    title: string;
     description?: string;
     icon?: React.ReactNode;
   }) => (
-    <div 
+    <div
       onClick={onClick}
       className={`
         relative cursor-pointer rounded-xl p-6 border-2 transition-all duration-200 flex items-start gap-4
-        ${selected 
-          ? 'border-brand-dark bg-brand-dark/5 ring-1 ring-brand-dark' 
+        ${selected
+          ? 'border-brand-dark bg-brand-dark/5 ring-1 ring-brand-dark'
           : 'border-gray-200 hover:border-brand-dark/50 bg-white'}
       `}
     >
@@ -135,8 +135,8 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onComplete, onBack }) 
           </div>
           <div className="mt-8 flex justify-between">
             <Button variant="outline" onClick={onBack}>返回</Button>
-            <Button 
-              onClick={handleNext} 
+            <Button
+              onClick={handleNext}
               disabled={!prefs.goal}
               className="flex-1 ml-4"
             >
@@ -181,25 +181,36 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onComplete, onBack }) 
 
           {/* Duration */}
           <div className="bg-white p-6 rounded-xl border border-gray-200">
-            <div className="flex items-center gap-2 mb-4">
-              <Clock className="text-brand-dark" />
-              <h3 className="font-bold text-lg">訓練時長 (分鐘)</h3>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <Clock className="text-brand-dark" />
+                <h3 className="font-bold text-lg">訓練時長</h3>
+              </div>
+              <div className="text-3xl font-black text-brand-dark">
+                {prefs.durationMinutes} <span className="text-lg font-medium text-gray-500">分鐘</span>
+              </div>
             </div>
-            <div className="flex justify-between gap-2">
-              {durations.map(d => (
-                <button
-                  key={d}
-                  onClick={() => setPrefs({ ...prefs, durationMinutes: d })}
-                  className={`
-                    flex-1 py-3 rounded-lg font-medium transition-all
-                    ${prefs.durationMinutes === d 
-                      ? 'bg-brand-dark text-brand-light shadow-md' 
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}
-                  `}
-                >
-                  {d}
-                </button>
-              ))}
+            <input
+              type="range"
+              min="10"
+              max="90"
+              step="5"
+              value={prefs.durationMinutes}
+              onChange={(e) => setPrefs({ ...prefs, durationMinutes: parseInt(e.target.value) })}
+              className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-thumb"
+              style={{
+                background: `linear-gradient(to right, 
+                  #b8d168 0%, 
+                  #b8d168 ${((prefs.durationMinutes - 10) / 80) * 100}%, 
+                  #e5e7eb ${((prefs.durationMinutes - 10) / 80) * 100}%, 
+                  #e5e7eb 100%)`
+              }}
+            />
+            <div className="flex justify-between text-xs text-gray-400 mt-2">
+              <span>10 分</span>
+              <span>30 分</span>
+              <span>60 分</span>
+              <span>90 分</span>
             </div>
           </div>
 
@@ -217,7 +228,7 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onComplete, onBack }) 
                   className={`
                     py-3 px-2 rounded-lg text-sm font-medium transition-all border-2
                     ${prefs.difficulty === d.id
-                      ? 'border-brand-dark bg-brand-dark/5 text-brand-dark' 
+                      ? 'border-brand-dark bg-brand-dark/5 text-brand-dark'
                       : 'border-transparent bg-gray-100 text-gray-600 hover:bg-gray-200'}
                   `}
                 >
@@ -232,8 +243,8 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onComplete, onBack }) 
 
           <div className="mt-8 flex justify-between">
             <Button variant="outline" onClick={() => setStep('equipment')}>上一步</Button>
-            <Button 
-              onClick={handleNext} 
+            <Button
+              onClick={handleNext}
               className="flex-1 ml-4 text-lg gap-2"
             >
               開始生成課表 <ChevronRight />

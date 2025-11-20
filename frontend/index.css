@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 自定義全域樣式 */
+:root {
+  --font-sans: 'Inter', 'Noto Sans TC', system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 20px;
+  /* 增加至20px提升閱讀體驗 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* 自定義滑桿樣式 */
+.slider-thumb::-webkit-slider-thumb {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #b8d168;
+  /* 單一品牌綠色 */
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(184, 209, 104, 0.5);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.slider-thumb::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 4px 12px rgba(184, 209, 104, 0.7);
+}
+
+.slider-thumb::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #b8d168;
+  /* 單一品牌綠色 */
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 8px rgba(184, 209, 104, 0.5);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.slider-thumb::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 4px 12px rgba(184, 209, 104, 0.7);
+}
+
+/* 隱藏滾動條但保留滾動功能 (用於播放器介面) */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* 自定義動畫：平滑的跳動效果 */
+@keyframes bounce-limited {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+
+  25% {
+    transform: translateY(-20px);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+
+  75% {
+    transform: translateY(-10px);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+.animate-bounce-limited {
+  animation: bounce-limited 1.2s ease-in-out;
+  animation-iteration-count: 1;
+}
+
+/* Modal 彈出動畫 */
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out;
+}

@@ -7,22 +7,34 @@ import { Exercise } from './db';
 export interface UserPreferences {
   /** 運動目標 (例如: 增肌, 減脂, 塑形) */
   goal: string;
-  
+
   /** 可用器材 (例如: 徒手, 啞鈴) */
   equipment: string[];
-  
+
   /** 總訓練時長 (分鐘) */
   durationMinutes: number;
-  
+
   /** 難度偏好 (初階, 中階, 高階) */
   difficulty: 'beginner' | 'intermediate' | 'advanced';
 }
 
 /**
  * 應用程式畫面狀態 (App Screen State)
- * 用於簡單的狀態路由 (MVP 不需複雜的 React Router)
+ * 用於簡單的狀態路由
  */
-export type AppScreen = 'home' | 'setup' | 'generating' | 'overview' | 'workout' | 'completed';
+export type AppScreen =
+  | 'home'
+  | 'login'
+  | 'register'
+  | 'setup'
+  | 'generating'
+  | 'overview'
+  | 'workout'
+  | 'completed'
+  | 'dashboard'
+  | 'history'
+  | 'profile';
+
 
 /**
  * 訓練計畫項目類型
