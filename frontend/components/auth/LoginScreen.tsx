@@ -15,7 +15,8 @@ import { LogIn, UserPlus } from 'lucide-react';
 export const LoginScreen: React.FC<{
     onSwitchToRegister: () => void;
     onGuestMode: () => void;
-}> = ({ onSwitchToRegister, onGuestMode }) => {
+    onLoginSuccess: () => void;
+}> = ({ onSwitchToRegister, onGuestMode, onLoginSuccess }) => {
     const { signIn } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -29,7 +30,7 @@ export const LoginScreen: React.FC<{
 
         try {
             await signIn(email, password);
-            // 登入成功後，AuthContext 會自動處理導向
+            onLoginSuccess();
         } catch (err: any) {
             setError(err.message || '登入失敗，請檢查帳號密碼');
         } finally {

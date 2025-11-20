@@ -153,6 +153,12 @@ export const generateWorkoutPlan = async (prefs: UserPreferences): Promise<PlanI
     const exercise = shuffled[index % shuffled.length];
 
     // 加入動作
+    if (exercise.duration_seconds <= 0) {
+      console.warn(`Exercise ${exercise.name} has invalid duration: ${exercise.duration_seconds}`);
+      index++;
+      continue;
+    }
+
     plan.push({
       type: 'exercise',
       duration: exercise.duration_seconds,

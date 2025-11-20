@@ -9,7 +9,7 @@
 
 body {
   font-family: var(--font-sans);
-  font-size: 20px;
+  font-size: 18px;
   /* 增加至20px提升閱讀體驗 */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -124,14 +124,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             const { data, error } = await supabase.auth.signUp({
                 email,
                 password,
+                options: {
+                    data: {
+                        display_name: displayName,
+                    },
+                },
             });
 
             if (error) throw error;
-
-            // 如果有提供 displayName，更新 Profile
-            if (data.user && displayName) {
-                await updateProfile({ display_name: displayName });
-            }
         } catch (error: any) {
             console.error('註冊失敗:', error);
             throw new Error(error.message || '註冊失敗，請稍後再試');

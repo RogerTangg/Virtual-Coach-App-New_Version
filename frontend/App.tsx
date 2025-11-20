@@ -263,6 +263,7 @@ export default function App() {
           <LoginScreen
             onSwitchToRegister={() => setCurrentScreen('register')}
             onGuestMode={() => setCurrentScreen('home')}
+            onLoginSuccess={() => setCurrentScreen('dashboard')}
           />
         ) : (
           <RegisterScreen
